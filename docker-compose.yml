@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  adb-service:
+    build: .
+    container_name: adb-service
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - ./logs:/usr/src/app/logs

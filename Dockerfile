@@ -1,18 +1,36 @@
-FROM node:18-slim
+# Etapa 1: Build
+FROM node:18-alpine AS builder
 
-# Install adb
-RUN apt-get update && apt-get install -y android-tools-adb && rm -rf /var/lib/apt/lists/*
+# Crear directorio de trabajo
+WORKDIR /app
 
-# Create app directory
-WORKDIR /usr/src/app
-
-# Copy package.json first for caching
+# Copiar package.json y package-lock.json primero (mejora cache de npm install)
 COPY package*.json ./
-RUN npm install --production
 
-# Copy app source
+# Instalar dependencias de producción
+RUN npm ci --only=production
+
+# Copiar el resto del código
 COPY . .
 
-EXPOSE 3000
-CMD ["npm", "start"]
+# Etapa 2: Runtime
+FROM node:18-alpine
 
+WORKDIR /app
+
+# Copiar solo lo necesario desde builder
+COPY --from=builder /app /app
+
+# Aseguramos que el usuario no sea root
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+# Exponer el puerto que usa la app
+EXPOSE 3010
+
+# Variable de entorno
+ENV NODE_ENV=production
+ENV PORT=3010
+
+# Comando de arranque
+CMD ["node", "server.js"]
