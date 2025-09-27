@@ -1,0 +1,38 @@
+# Dependencias locales (se reinstalan dentro del contenedor)
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Archivos de dependencias bloqueadas (ya están en el contenedor)
+package-lock.json
+yarn.lock
+
+# Archivos y carpetas temporales
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Configuración de IDEs/editores
+.vscode
+.idea
+*.iml
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Git y CI/CD
+.git
+.gitignore
+.github
+.gitlab-ci.yml
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Otros innecesarios
+.env.local
+.env.development
+.env.test
