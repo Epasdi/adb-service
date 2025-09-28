@@ -11,6 +11,7 @@ COPY package*.json ./
 RUN apk add --no-cache android-tools
 
 # Instalar dependencias de producción
+COPY package*.json ./
 RUN npm install --omit=dev
 
 # Copiar el resto del código
