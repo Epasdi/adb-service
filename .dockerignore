@@ -4,7 +4,6 @@ npm-debug.log
 yarn-error.log
 
 # Archivos de dependencias bloqueadas (ya están en el contenedor)
-package-lock.json
 yarn.lock
 
 # Archivos y carpetas temporales
