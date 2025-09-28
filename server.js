@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // --- Middleware de auth sencillo ---
-const TOKEN = process.env.API_TOKEN || "TU_TOKEN_SEGURO";
+const TOKEN = process.env.API_TOKEN || "cad4e21f28e4b78b1023886e087763c7c6501be3f6b2c86e5fbf8d2e7cc24d26";
 app.use((req, res, next) => {
   const auth = req.headers.authorization || "";
   if (auth !== `Bearer ${TOKEN}`) {
