@@ -7,6 +7,9 @@ WORKDIR /app
 # Copiar package.json y package-lock.json primero (mejora cache de npm install)
 COPY package*.json ./
 
+# Instalar adb en Alpine
+RUN apk add --no-cache android-tools
+
 # Instalar dependencias de producción
 RUN npm install --omit=dev
 
